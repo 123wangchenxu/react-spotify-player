@@ -1,0 +1,34 @@
+.header {
+  position: fixed;
+  width: 900px;
+  z-index: 1000;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  background: #181818;
+}
+.header .track-search-container {
+  position: relative;
+  top: 10px;
+}
+.header .track-search-container input {
+  background: #fff;
+  width: 120px;
+  border-radius: 10px;
+  border: none;
+  font-family: 'Proxima Nova', Georgia, sans-serif;
+  padding: 4px 4px 4px 10px;
+  outline: none;
+}
+.header .track-search-container button {
+  background: none;
+  border: none;
+  outline: none;
+}
+.header .track-search-container button .search {
+  margin-left: 5px;
+  cursor: pointer;
+  color: white;
+  font-size: 15px;
+}

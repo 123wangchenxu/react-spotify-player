@@ -6,6 +6,14 @@ h3 {
   margin: 0;
   padding: 0;
 }
+body {
+  font-family: 'Proxima Nova', Georgia, sans-serif;
+  background: #181818;
+  color: #fff;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0;
+}
 .app-container {
   display: flex;
   position: relative;
@@ -17,5 +25,11 @@ h3 {
   bottom: 10px;
   width: 180px;
   overflow-y: auto;
-  background-color: blue;
+}
+.app-container .main-section {
+  width: 900px;
+  position: relative;
+  left: 200px;
+  padding: 0 10px;
+  background-color: red;
 }
