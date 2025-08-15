@@ -1,0 +1,76 @@
+.footer
+{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    background: rgb(40, 40, 40);
+    height: 80px;
+    z-index: 2;
+    .song-player-container
+    {
+        .song-details {
+        position: absolute;
+        left: 20px;
+        line-height: 22px;
+        }
+        .song-controls
+        {
+            justify-content: center;
+            display: flex;
+            margin-top: 20px;
+             .reverse-song
+            {
+            .reverse, .forward {
+                font-size: 16px;
+            }
+            .forward, .reverse, .play-btn
+            {
+                padding: 0 5px;
+                color: rgb(179, 179, 179);
+                cursor: pointer;
+            }
+            }
+        }
+        .song-progress-container
+        {
+            display:flex;
+            margin-top: -10px;
+            justify-content: center;
+            .time-start
+            {
+                font-size: 12px;
+                position: relative;
+                top: -5px;
+                left: -10px;
+            }
+            .song-progress
+            {
+                width: 500px;
+                height: 4px;
+                background: rgb(64, 64, 64);
+                border-radius: 4px;
+                .song-expired {
+                margin: 0;
+                width: 100px;
+                height: 4px;
+                background: #1db954;
+                border-radius: 4px;
+                }
+            }
+            .time-end
+            {
+                font-size: 12px;
+                position: relative;
+                top: -5px;
+                left: 10px;
+            }
+        }
+    }
+    .volume-container 
+    {
+        position: absolute;
+        top: 48px;
+        right: 10px;
+    }
+}

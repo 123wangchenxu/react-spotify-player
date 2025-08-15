@@ -1,0 +1,65 @@
+.footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  background: #282828;
+  height: 80px;
+  z-index: 2;
+}
+.footer .song-player-container .song-details {
+  position: absolute;
+  left: 20px;
+  line-height: 22px;
+}
+.footer .song-player-container .song-controls {
+  justify-content: center;
+  display: flex;
+  margin-top: 20px;
+}
+.footer .song-player-container .song-controls .reverse-song .reverse,
+.footer .song-player-container .song-controls .reverse-song .forward {
+  font-size: 16px;
+}
+.footer .song-player-container .song-controls .reverse-song .forward,
+.footer .song-player-container .song-controls .reverse-song .reverse,
+.footer .song-player-container .song-controls .reverse-song .play-btn {
+  padding: 0 5px;
+  color: #b3b3b3;
+  cursor: pointer;
+}
+.footer .song-player-container .song-progress-container {
+  display: flex;
+  margin-top: -10px;
+  justify-content: center;
+}
+.footer .song-player-container .song-progress-container .time-start {
+  font-size: 12px;
+  position: relative;
+  top: -5px;
+  left: -10px;
+}
+.footer .song-player-container .song-progress-container .song-progress {
+  width: 500px;
+  height: 4px;
+  background: #404040;
+  border-radius: 4px;
+}
+.footer .song-player-container .song-progress-container .song-progress .song-expired {
+  margin: 0;
+  width: 100px;
+  height: 4px;
+  background: #1db954;
+  border-radius: 4px;
+}
+.footer .song-player-container .song-progress-container .time-end {
+  font-size: 12px;
+  position: relative;
+  top: -5px;
+  left: 10px;
+}
+.footer .volume-container {
+  position: absolute;
+  top: 48px;
+  right: 10px;
+}

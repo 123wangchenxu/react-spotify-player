@@ -7,6 +7,7 @@ import { Outlet } from 'react-router-dom';
 import SideMenu from './components/SideMenu';
 import ArtistList from './components/ArtistList';
 import Header from './components/Header';
+import Footer from './components/Footer';
 function App() {
   useEffect(()=>{
       const songs=async ()=>{
@@ -28,6 +29,7 @@ function App() {
             <Outlet/>
           </div>
         </div>
+        <Footer/>
       </div>
     </div>
   );
