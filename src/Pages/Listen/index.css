@@ -1,0 +1,43 @@
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: grey;
+  border-radius: 5px;
+}
+.listen {
+  margin: 0 auto;
+  width: 1200px;
+  height: 100vh;
+}
+.listen .listen-detail {
+  margin-top: 10vh;
+  margin-bottom: 20vh;
+  height: 70vh;
+  width: 1200px;
+  display: flex;
+}
+.listen .listen-detail img {
+  margin-top: 10vh;
+  margin-left: 5vw;
+}
+.listen .listen-detail .listen-lyrics {
+  margin-left: 250px;
+}
+.listen .listen-detail .listen-lyrics p {
+  font-size: 18px;
+  opacity: 0.8;
+  color: white;
+}
+.listen .listen-detail .listen-lyrics .lyrics-title {
+  font-size: 24px;
+  font-weight: bolder;
+  opacity: 1;
+  color: white;
+  margin-bottom: 20px;
+}
+.listen .listen-detail .listen-lyrics .lyrics-detail {
+  width: 40vw;
+  height: 70vh;
+  overflow-y: scroll;
+}

@@ -3,6 +3,7 @@ import './index.less'
 import { useEffect, useState } from 'react'
 import { getAlbum } from '../../api/albums'
 import { getEverydayRecommend} from '../../api/browse'
+import { Link } from 'react-router-dom'
 export default function Browse() {
   const headers=['Everyday Recommend','NEW RELEASES','FEATURED']
   const [active,setActive]=useState('Everyday Recommend')
@@ -35,7 +36,9 @@ export default function Browse() {
         {
           active==='Everyday Recommend'?everydaysong.map((item,index)=>{
             return <div className='songs-display-item'>
-              <img src={item.sizable_cover.replace('{size}','200')}/>
+              <Link to={`/listen/${item.hash}`}>
+                <img src={item.sizable_cover.replace('{size}','200')}/>
+              </Link>
               <div className='song-display-detail'>
                 {item.filename}
               </div>

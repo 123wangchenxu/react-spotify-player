@@ -5,6 +5,7 @@ import Songs from '../Pages/Songs/index'
 import Albums from "../Pages/Albums/idnex";
 import Artists from "../Pages/Artists/index"
 import App from "../App";
+import Listen from "../Pages/Listen";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -17,5 +18,9 @@ const router = createBrowserRouter([
       { path: "artists", element: <Artists /> },
     ],
   },
+  {
+    path:"/listen/:id",
+    element:<Listen/>
+  }
 ]);
 export default router;

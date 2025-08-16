@@ -1,7 +1,7 @@
 import axios from 'axios'
 const httpInstance = axios.create({
   baseURL: "https://ku-gou-music-api-orpin.vercel.app",
-  timeout: 5000,
+  timeout: 15000,
 });
 // 添加请求拦截器
 axios.interceptors.request.use(function (config) {
