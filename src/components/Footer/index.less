@@ -19,17 +19,23 @@
             justify-content: center;
             display: flex;
             margin-top: 20px;
+            margin-bottom: 20px;
              .reverse-song
             {
-            .reverse, .forward {
-                font-size: 16px;
+                .reverse, .forward {
+                    font-size: 16px;
+                }
+                .forward, .reverse, .play-btn
+                {
+                    padding: 0 5px;
+                    color: rgb(179, 179, 179);
+                    cursor: pointer;
+                }
             }
-            .forward, .reverse, .play-btn
+            .play-btn .play-btnfa
             {
-                padding: 0 5px;
-                color: rgb(179, 179, 179);
-                cursor: pointer;
-            }
+                margin-right:10px;
+                margin-left: 10px;
             }
         }
         .song-progress-container
@@ -37,7 +43,7 @@
             display:flex;
             margin-top: -10px;
             justify-content: center;
-            .time-start
+            .timer-start
             {
                 font-size: 12px;
                 position: relative;
@@ -58,7 +64,7 @@
                 border-radius: 4px;
                 }
             }
-            .time-end
+            .timer-end
             {
                 font-size: 12px;
                 position: relative;

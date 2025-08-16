@@ -16,6 +16,7 @@
   justify-content: center;
   display: flex;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 .footer .song-player-container .song-controls .reverse-song .reverse,
 .footer .song-player-container .song-controls .reverse-song .forward {
@@ -28,12 +29,16 @@
   color: #b3b3b3;
   cursor: pointer;
 }
+.footer .song-player-container .song-controls .play-btn .play-btnfa {
+  margin-right: 10px;
+  margin-left: 10px;
+}
 .footer .song-player-container .song-progress-container {
   display: flex;
   margin-top: -10px;
   justify-content: center;
 }
-.footer .song-player-container .song-progress-container .time-start {
+.footer .song-player-container .song-progress-container .timer-start {
   font-size: 12px;
   position: relative;
   top: -5px;
@@ -52,7 +57,7 @@
   background: #1db954;
   border-radius: 4px;
 }
-.footer .song-player-container .song-progress-container .time-end {
+.footer .song-player-container .song-progress-container .timer-end {
   font-size: 12px;
   position: relative;
   top: -5px;

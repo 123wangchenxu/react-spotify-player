@@ -11,6 +11,29 @@
     .browse-headers
     {
         display: flex;
+        margin-bottom: 20px;
+    }
+    .songs-display
+    {
+        display:flex;
+        flex-wrap: wrap;
+        width:900px;
+        .songs-display-item
+        {
+            display: flex;
+            flex-direction: column;
+            height:240px;
+            img
+            {
+                width:200px;
+                height:200px;
+                margin-right:20px;
+            }
+        }
+        .songs-display-item
+        {
+            font-size:14px;
+        }
     }
     .browse-headers p{
         margin-left: 20px;
@@ -22,10 +45,17 @@
         letter-spacing: 1px;
         margin: 0 20px;
         cursor: pointer;
+        &.active
+        {
+            margin-bottom: -3px;
+            content:"";
+            border-bottom: 3px solid green;
+        }
+
     }
     .browse-headers p:first-child
     {
         margin-right:20px;
-    margin-left:0px;
+        margin-left:0px;
     }
 }

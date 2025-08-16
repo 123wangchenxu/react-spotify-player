@@ -12,7 +12,7 @@ export default function Footer()
                         <i className="fa fa-step-backward reverse" aria-hidden="true"></i>
                     </div>
                     <div className="play-btn">
-                        <i className="fa play-btnfa fa-play-circle-o play-btn" aria-hidden="true"></i>
+                        <i className="fa play-btnfa fa-play play-btn" aria-hidden="true"></i>
                     </div>
                     <div className="next-song">
                         <i className="fa fa-step-forward forward" aria-hidden="true"></i>
