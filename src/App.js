@@ -29,7 +29,7 @@ function App() {
             <Outlet/>
           </div>
         </div>
-        <Footer/>
+        <Footer time_start={"00:00"} time_end={"00:00"}/>
       </div>
     </div>
   );

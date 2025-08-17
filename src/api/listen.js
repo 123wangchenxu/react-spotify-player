@@ -29,3 +29,12 @@ export function getLyrics(id,accesskey)
         }
     })
 }
+export function getListenSong(hash)
+{
+    return request.get('/song/url',{
+        params:
+        {
+            hash
+        }
+    })
+}
