@@ -1,0 +1,48 @@
+.login
+{
+    margin:0 auto;
+    width:50vw;
+    height:50vh;
+    margin-top:25vh;
+    background: linear-gradient(rgba(255,255,255,0.5), rgba(250,255,188,1));
+    opacity: 0.8;
+    display:flex;
+    .login-img
+    {
+        width:29vh;
+        height:calc(50vh - 4px);
+        border:2px solid #FAFFBC;
+        img
+        {
+            height:calc(50vh - 4px);
+        }
+    }
+    .login-form
+    {
+        width:calc(100vw - 29vh);
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top:5vh;
+        .title
+        {
+            font-weight: bolder;
+            font-size: 20px;
+            color:#FAFFBC;
+            margin-bottom: 8vh;
+        }
+    }
+}
+.form-button
+{
+    &.ant-btn-variant-solid:not(:disabled):not(.ant-btn-disabled):hover
+    {
+        color: grey;
+        background: #FAFFBC;
+    }
+    margin-top: 3vh;
+    margin-left: 4vw;
+    width:12vw;
+    background-color: #FAFFBC;
+    color:grey;
+}
