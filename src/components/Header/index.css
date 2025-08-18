@@ -32,3 +32,11 @@
   color: white;
   font-size: 15px;
 }
+.user-details-container {
+  display: flex;
+  align-items: center;
+}
+.user-details-container .user-image {
+  width: 40px;
+  height: 40px;
+}

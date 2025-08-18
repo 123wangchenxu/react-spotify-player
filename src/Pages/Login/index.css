@@ -28,6 +28,19 @@
   color: #FAFFBC;
   margin-bottom: 8vh;
 }
+.login .login-form input {
+  border-radius: 0;
+}
+.login .login-form .ant-input-group-addon {
+  padding: 0;
+  background-color: white;
+  border: 0;
+  color: #FAFFBC;
+  border-radius: 0;
+}
+.login .login-form .ant-input-group-addon .ant-btn {
+  border: 0;
+}
 .form-button {
   margin-top: 3vh;
   margin-left: 4vw;
