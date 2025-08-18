@@ -1,18 +1,24 @@
 import { create } from "zustand";
 
 const useStore = create((set) => ({
-  nickname:'',
-  pic:'',
-  setNickName:(value)=>{
+  nickname: "",
+  pic: "",
+  token: "",
+  setNickName: (value) => {
     set({
-        nickname:value
-    })
+      nickname: value,
+    });
   },
-  setPic:(value)=>{
+  setPic: (value) => {
     set({
-        pic:value
-    })
-  }
+      pic: value,
+    });
+  },
+  setToken: (value) => {
+    set({
+      token: value,
+    });
+  },
 }));
 
 export default useStore;

@@ -8,6 +8,8 @@ export default function Footer(props)
     let timeRecord=[]
     const progressStart=()=>{
             if (intervalRef.current) return; 
+            const audio = new Audio(props.musicUrl);
+            audio.play();
             intervalRef.current=setInterval(()=>{
                 props.setColorCount(colorCount=>
                     {

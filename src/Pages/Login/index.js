@@ -10,7 +10,7 @@ export default function()
   const [countdown,setCountDown]=useState(60)
   const [mobile,setMobile]=useState('')
   const navigate=useNavigate()
-  const {nickname,pic,setNickName,setPic}=useStore()
+  const {nickname,pic,token,setNickName,setPic,setToken}=useStore()
   const submitData=async()=>{
      try {
        const values = await form.validateFields(); // 校验所有字段
@@ -18,6 +18,7 @@ export default function()
        const loginData=await getLogin(values.phone,values.code)
        setNickName(loginData.data.data.nickname)
        setPic(loginData.data.data.pic);
+       setToken(loginData.data.data.token)
        navigate('/browse')
      } catch {
        return Error('登录失败')

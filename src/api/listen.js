@@ -1,4 +1,5 @@
 import request from '../utils/httpInstance'
+import extra from '../utils/extra'
 export function getSongDetail(hash)
 {
     return request.get('/privilege/lite',{
@@ -31,10 +32,10 @@ export function getLyrics(id,accesskey)
 }
 export function getListenSong(hash)
 {
-    return request.get('/song/url',{
-        params:
-        {
-            hash
-        }
-    })
+    return extra.get("/app/i/getSongInfo.php", {
+      params: {
+        hash,
+        cmd:'playInfo'
+      },
+    });
 }

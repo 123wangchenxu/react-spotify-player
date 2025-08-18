@@ -2,8 +2,7 @@ import './index.less'
 import useStore from '../../store/user'
 export default function Header()
 {
-    const {nickname,pic,setNickName,setPic}=useStore()
-    const token=['Program King']
+    const {nickname,pic,token,setNickName,setPic,setToken}=useStore()
     return <div className="header">
             <div className="track-search-container">
                 <form>

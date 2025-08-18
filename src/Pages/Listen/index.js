@@ -38,10 +38,13 @@ export default function Listen()
         lyricdata.data.candidates[0].accesskey
       );
       const musicData=await getListenSong(id)
+      if(musicData.data.url)
+      {
+        setMusicUrl(musicData.data.url)
+      }
       /*
       拿到数据之前，需要登录，设计登录界面
       */
-      console.log(musicData)
       setLyrics(getLyric.data.decodeContent.split("\n").slice(10));
       if(scrollButton)
       {
@@ -57,11 +60,6 @@ export default function Listen()
           }
           let current_time = lyrics.slice(currentIndex)[0].slice(1, 9).split(":");
           let current_seconds =parseInt(current_time[0]) * 6000 + parseInt(current_time[1]*100);
-          console.log(
-            current_time[0],
-            current_time[1],
-            parseInt(current_time[1] * 100)
-          );
           if(current_seconds===count)
           {
             setActiveLyrics(currentIndex-1)
@@ -108,6 +106,7 @@ export default function Listen()
               btn_click={() => setScrollButton(true)}
               setColorCount={setColorCount}
               colorCount={colorCount}
+              musicUrl={musicUrl}
             />
           </div>
         )}
