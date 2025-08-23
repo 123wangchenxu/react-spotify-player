@@ -2,10 +2,10 @@ import { useFormState } from 'react-dom'
 import './index.less'
 import { useEffect, useState } from 'react'
 import { getAlbum } from '../../api/albums'
-import { getEverydayRecommend} from '../../api/browse'
+import { get80Songs, getEverydayRecommend, getKoreaListSong, getKoreaSongs, getPlayListTag} from '../../api/browse'
 import { Link } from 'react-router-dom'
 export default function Browse() {
-  const headers=['Everyday Recommend','NEW RELEASES','FEATURED']
+  const headers=['Everyday Recommend','1980s','Korea hot Song']
   const [active,setActive]=useState('Everyday Recommend')
   const [album,setAlbum]=useState('')
   const[everydaysong,setEverydaySong]=useState([])
@@ -16,6 +16,24 @@ export default function Browse() {
         {
           const datas=await getEverydayRecommend()
           setEverydaySong(datas.data.data.song_list)
+        }
+        else if(active==='1980s')
+        {
+          setEverydaySong([])
+          const datas=await get80Songs()
+          setEverydaySong(datas.data.data.song_list)
+        }
+        else
+        {
+          setEverydaySong([])
+          const datas=await getKoreaSongs()
+          const allsongs=await getKoreaListSong(datas.data.data.special_list[6].global_collection_id)
+          const koreaSongs=allsongs.data.data.songs
+          koreaSongs.forEach(element => {
+            element.filename=element.remark
+            element.sizable_cover=element.cover
+          });
+          setEverydaySong(koreaSongs)
         }
       })()
   },[active])
@@ -34,8 +52,8 @@ export default function Browse() {
       </div>
       <div className="songs-display">
         {
-          active==='Everyday Recommend'?everydaysong.map((item,index)=>{
-            return <div className='songs-display-item'>
+          everydaysong.map((item,index)=>{
+            return <div className='songs-display-item' key={index}>
               <Link to={`/listen/${item.hash}`}>
                 <img src={item.sizable_cover.replace('{size}','200')}/>
               </Link>
@@ -43,7 +61,7 @@ export default function Browse() {
                 {item.filename}
               </div>
             </div>
-          }):<div>haha</div>
+          })
       }
       </div>
     </div>

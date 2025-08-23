@@ -21,11 +21,17 @@
   display: flex;
   flex-direction: column;
   height: 240px;
+  width: 210px;
 }
 .section-title .songs-display .songs-display-item img {
   width: 200px;
   height: 200px;
   margin-right: 20px;
+}
+.section-title .songs-display .songs-display-item .song-display-detail {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .section-title .songs-display .songs-display-item {
   font-size: 14px;
