@@ -5,6 +5,9 @@ import { getSingerImage } from '../../api/browse'
 import { useEffect, useState,useRef} from 'react'
 import Footer from '../../components/Footer'
 import React from 'react'
+import colority from 'colority'
+import MyAudio from './components/Audio'
+import MyAduio from './components/Audio'
 export default function Listen()
 {
   const [singData, setSingData] = useState({});
@@ -18,19 +21,54 @@ export default function Listen()
   const [colorCount,setColorCount]=useState(0)
   const [time_start,setTimeStart]=useState("00:00")
   const [musicUrl,setMusicUrl]=useState('')
+  const[pauseChange,setPauseChange]=useState(false)
+  const[volume,setVolume]=useState(100)
   const FooterMemo = React.memo(Footer, (prevProps, nextProps) => {
     // 比较除了 lyrics 之外的所有 props
     return (
-      prevProps.colorCount === nextProps.colorCount
+      prevProps.colorCount === nextProps.colorCount &&
+      prevProps.pauseChange===nextProps.pauseChange &&
+      prevProps.volume === nextProps.volume
     );
   });
+  const MyAduioMemo = React.memo(MyAduio, (prevProps, nextProps) => {
+      return (
+        prevProps.volume === nextProps.volume
+      );
+    });
   useEffect(() => {
     (async () => {
       const datas = await getSongDetail(id);
+      console.log(datas)
       setSingData(datas.data.data[0]);
       const imgData = await getSingerImage(id);
       setImgUrl(
         imgData.data.data[0][0].sizable_avatar.replace("{size}", "400")
+      );
+      const imageURL = imgData.data.data[0][0].sizable_avatar.replace(
+        "{size}",
+        "400"
+      );
+      colority(
+        imageURL,
+        {
+          skip: 30000,
+        },
+        (colors) => {
+          const gradientColors = colors
+            .map((c) => c.replace("rgb", "rgba").replace(")", ",0.5)"))
+            .join(", ");
+          document.body.style.background = `linear-gradient(90deg, ${gradientColors}), black`;
+          document.body.style.backgroundBlendMode = "screen";
+          console.log(colors)
+          if(colors.length>2)
+          {
+              document.documentElement.style.setProperty(
+              "--main-gradient",
+              `${colors[2]}`
+            );
+          }
+        }
       );
       const lyricdata = await SearchLyrics(id);
       const getLyric = await getLyrics(
@@ -77,7 +115,7 @@ export default function Listen()
     <div className="listen">
       <div className="listen-detail">
         <div className="listen-img">
-          <img src={imgUrl} />
+          <img src={imgUrl} crossOrigin="anonymous" />
         </div>
         {lyrics[0] && (
           <div className="listen-lyrics">
@@ -107,6 +145,14 @@ export default function Listen()
               setColorCount={setColorCount}
               colorCount={colorCount}
               musicUrl={musicUrl}
+              pauseChange={pauseChange}
+              volume={volume}
+              setVolume={setVolume}
+            />
+            <MyAduioMemo
+              musicUrl={musicUrl}
+              scrollButton={scrollButton}
+              volume={volume}
             />
           </div>
         )}

@@ -11,6 +11,7 @@ export default function Browse() {
   const[everydaysong,setEverydaySong]=useState([])
   const singer_images=[]
   useEffect(()=>{
+      document.body.style.background='#181818';
       (async ()=>{
         if(active==='Everyday Recommend')
         {

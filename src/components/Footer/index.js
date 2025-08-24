@@ -8,8 +8,6 @@ export default function Footer(props)
     let timeRecord=[]
     const progressStart=()=>{
             if (intervalRef.current) return; 
-            const audio = new Audio(props.musicUrl);
-            audio.play();
             intervalRef.current=setInterval(()=>{
                 props.setColorCount(colorCount=>
                     {
@@ -41,7 +39,7 @@ export default function Footer(props)
             </div>
             <div className="play-btn">
               <i
-                className="fa play-btnfa fa-play play-btn"
+                className={`fa play-btnfa ${!props.pauseChange?'fa-play play-btn':'fa-pause pause-btn'}`}
                 aria-hidden="true"
                 onClick={() => {
                   props.btn_click();
@@ -71,7 +69,10 @@ export default function Footer(props)
             min="0"
             max="100"
             className="volume"
-            defaultValue={100}
+            value={props.volume}
+            onChange={(e)=>{
+              props.setVolume(e.target.value)
+            }}
           />
         </div>
       </div>

@@ -1,3 +1,6 @@
+:root {
+  --main-gradient: whitesmoke;
+}
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -32,7 +35,7 @@
   transition: all 0.3s;
 }
 .listen .listen-detail .listen-lyrics p.active {
-  color: whitesmoke;
+  color: var(--main-gradient);
   opacity: 1;
   font-weight: bold;
   font-size: 22px;
