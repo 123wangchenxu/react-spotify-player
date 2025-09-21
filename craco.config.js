@@ -23,6 +23,7 @@ module.exports = {
   },
   devServer: {
     port:'3001',
+    runTimeErrors: false,
     proxy: {
       '/kg-api': {
         target: 'http://m.kugou.com',

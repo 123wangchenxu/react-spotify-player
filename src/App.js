@@ -8,28 +8,60 @@ import SideMenu from './components/SideMenu';
 import ArtistList from './components/ArtistList';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { useLocation } from 'react-router-dom';
+import { create } from "zustand";
+
+export const useFooterStore = create((set) => ({
+  musicUrl: "",
+  isPlaying:false,
+  volume:60,
+  currentTime:0,
+  timeStart:"00:00",
+  timeEnd:"00:00",
+  isActive:false,
+  audio:null,
+  setAudio: (audio) => set(()=>({ audio: audio })),
+  setIsActive: (isActive) => set(()=>({ isActive: isActive })),
+  setTimeStart: (timeStart) => set(()=>({ timeStart: timeStart })),
+  setTimeEnd: (timeEnd) => set(()=>({ timeEnd: timeEnd })),
+  setVolume: (volume) => set(()=>({ volume: volume })),
+  setIsPlaying: (isPlaying) => set(()=>({ isPlaying: isPlaying })),
+  setMusicUrl: (url) => set(()=>({ musicUrl: url })),
+  setCurrentTime: (currentTime) => set(()=>({ currentTime: currentTime })),
+}));
+
 function App() {
+  const location=useLocation()
   useEffect(()=>{
       const songs=async ()=>{
         const getsongs=await getNewSongs()
-        console.log(getsongs)
       }
       songs()
   },[])
   return (
     <div className="App">
       <div className="app-container">
-        <div className="left-side-section">
-          <SideMenu/>
-          <ArtistList/>
-        </div>
-        <div className='main-section'>
-          <Header/>
-          <div className='main-section-container'>
-            <Outlet/>
+        {location.pathname.startsWith("/listen") ? (
+          <></>
+        ) : (
+          <div className="left-side-section">
+            <SideMenu />
+            <ArtistList />
           </div>
-        </div>
-        <Footer time_start={"00:00"} time_end={"00:00"}/>
+        )}
+        {
+          location.pathname.startsWith("/listen") ? (
+            <Outlet></Outlet>
+          ) : (
+            <div className="main-section">
+              <Header />
+              <div className="main-section-container">
+                <Outlet />
+              </div>
+            </div>
+          )
+        }
+        <Footer />
       </div>
     </div>
   );

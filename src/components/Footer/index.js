@@ -1,32 +1,77 @@
 import { useMemo, useRef,useState,useEffect } from 'react'
 import './index.less'
-export default function Footer(props)
+import { useFooterStore } from '../../App'
+import { message } from 'antd';
+export default function Footer()
 {
-    const splitSeconds=props.time_end.split(':')
+  const {
+    musicUrl,
+    isPlaying,
+    volume,
+    currentTime,
+    timeStart,
+    timeEnd,
+    setTimeStart,
+    setTimeEnd,
+    setVolume,
+    setIsPlaying,
+    setMusicUrl,
+    setCurrentTime,
+    isActive,
+    setIsActive,
+    audio,
+    setAudio,
+  } = useFooterStore();
+    const splitSeconds=timeEnd.split(':')
     const seconds=parseInt(splitSeconds[0]*60)+parseInt(splitSeconds[1])
-    const intervalRef = useRef(null);
-    let timeRecord=[]
-    const progressStart=()=>{
-            if (intervalRef.current) return; 
-            intervalRef.current=setInterval(()=>{
-                props.setColorCount(colorCount=>
-                    {
-                        timeRecord = [];
-                        if (Math.floor(colorCount / 60 )< 10)
-                          timeRecord.push("0" + Math.floor(colorCount / 60));
-                        else timeRecord.push(Math.floor(colorCount / 60).toString());
-                        if (colorCount % 60 < 10)
-                          timeRecord.push("0" + (colorCount % 60));
-                        else timeRecord.push((colorCount % 60).toString());
-                        props.setTimeStart(timeRecord.join(":"));
-                        if (colorCount === seconds)
-                            clearInterval(intervalRef.current);
-                        return colorCount+1
-                    }
-                )
-            },1000)
+    const [messageApi, contextHolder] = message.useMessage();
+    const error = (message) => {
+      messageApi.open({
+        type: "error",
+        content: message,
+      });
+      setIsPlaying(false)
+    };
+    useEffect(()=>{
+      const audio=new Audio(musicUrl)
+      setAudio(audio)
+      const updateTime = () => {
+        setCurrentTime(audio.currentTime);
+        let timeRecord = [];
+        if (Math.floor(parseInt(audio.currentTime) / 60) < 10)
+          timeRecord.push("0" + Math.floor(parseInt(audio.currentTime) / 60));
+        else timeRecord.push(Math.floor(parseInt(audio.currentTime) / 60).toString());
+        if (parseInt(audio.currentTime) % 60 < 10) timeRecord.push("0" + (parseInt(audio.currentTime % 60)));
+        else timeRecord.push(parseInt((audio.currentTime % 60)).toString());
+        setTimeStart(timeRecord.join(":"));
+      }
+      audio.addEventListener("timeupdate", updateTime);
+      return () => {
+        audio.removeEventListener("timeupdate", updateTime);
+      };
+    },[musicUrl])
+    const progressStart=(state)=>{
+      setIsPlaying(state)
+            if(musicUrl==='')
+            {
+              error('没有音乐url,无法播放')
+              return
+            }
+            if(state && musicUrl!=='')
+            {
+              audio.src=musicUrl
+              audio.currentTime=currentTime
+              audio.play()
+            }
+            else
+            {
+              audio.pause()
+              setCurrentTime(audio.currentTime)
+            }
     }
     return (
+      <>
+      {contextHolder}
       <div className="footer">
         <div className="song-player-container">
           <div className="song-details">
@@ -39,11 +84,10 @@ export default function Footer(props)
             </div>
             <div className="play-btn">
               <i
-                className={`fa play-btnfa ${!props.pauseChange?'fa-play play-btn':'fa-pause pause-btn'}`}
+                className={`fa play-btnfa ${isPlaying?'fa-pause pause-btn':'fa-play play-btn'}`}
                 aria-hidden="true"
                 onClick={() => {
-                  props.btn_click();
-                  progressStart();
+                  progressStart(!isPlaying);
                 }}
               ></i>
             </div>
@@ -52,14 +96,14 @@ export default function Footer(props)
             </div>
           </div>
           <div className="song-progress-container">
-            <p className="timer-start">{props.timeStart}</p>
+            <p className="timer-start">{timeStart}</p>
             <div className="song-progress">
               <div
                 className="song-expired"
-                style={{ width: `${props.colorCount*500/seconds}px` }}
+                style={{ width: `${currentTime*500/seconds}px` }}
               ></div>
             </div>
-            <p className="timer-end">{props.time_end}</p>
+            <p className="timer-end">{timeEnd}</p>  
           </div>
         </div>
         <div className="volume-container">
@@ -69,12 +113,14 @@ export default function Footer(props)
             min="0"
             max="100"
             className="volume"
-            value={props.volume}
+            value={volume}
             onChange={(e)=>{
-              props.setVolume(e.target.value)
+              setVolume(e.target.value)
+              audio.volume=e.target.value/100
             }}
           />
         </div>
       </div>
+    </>
     );
 }
