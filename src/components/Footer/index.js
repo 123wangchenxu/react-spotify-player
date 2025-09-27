@@ -33,21 +33,36 @@ export default function Footer()
       setIsPlaying(false)
     };
     useEffect(()=>{
-      const audio=new Audio(musicUrl)
-      setAudio(audio)
+      console.log(window.location.href);
+      if (audio !== null && audio.src!==''&&audio.src!==window.location.href) {
+        if(audio.src!==musicUrl)
+        {
+          audio.pause(); // 先暂停播放
+          audio.src = ""; // 清空资源
+          try {
+            if (typeof updateTime === 'function') {
+              audio.removeEventListener("timeupdate", updateTime);
+            }
+          } catch (e) {
+            console.log('移除事件监听器失败:', e);
+          }
+        }
+      }
+      const newAudio = new Audio(musicUrl);
+      setAudio(newAudio);
       const updateTime = () => {
-        setCurrentTime(audio.currentTime);
+        setCurrentTime(newAudio.currentTime);
         let timeRecord = [];
-        if (Math.floor(parseInt(audio.currentTime) / 60) < 10)
-          timeRecord.push("0" + Math.floor(parseInt(audio.currentTime) / 60));
-        else timeRecord.push(Math.floor(parseInt(audio.currentTime) / 60).toString());
-        if (parseInt(audio.currentTime) % 60 < 10) timeRecord.push("0" + (parseInt(audio.currentTime % 60)));
-        else timeRecord.push(parseInt((audio.currentTime % 60)).toString());
+        if (Math.floor(parseInt(newAudio.currentTime) / 60) < 10)
+          timeRecord.push("0" + Math.floor(parseInt(newAudio.currentTime) / 60));
+        else timeRecord.push(Math.floor(parseInt(newAudio.currentTime) / 60).toString());
+        if (parseInt(newAudio.currentTime) % 60 < 10) timeRecord.push("0" + (parseInt(newAudio.currentTime % 60)));
+        else timeRecord.push(parseInt((newAudio.currentTime % 60)).toString());
         setTimeStart(timeRecord.join(":"));
       }
-      audio.addEventListener("timeupdate", updateTime);
+      newAudio.addEventListener("timeupdate", updateTime);
       return () => {
-        audio.removeEventListener("timeupdate", updateTime);
+        newAudio.removeEventListener("timeupdate", updateTime);
       };
     },[musicUrl])
     const progressStart=(state)=>{

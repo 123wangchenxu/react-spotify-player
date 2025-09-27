@@ -42,58 +42,70 @@ export default function Listen()
       });
     };
     (async () => {
+      let datas = await getSongDetail(id);
+      setSingData(datas.data.data[0]);
+      let imgData = await getSingerImage(id);
+      setImgUrl(
+        imgData.data.data[0][0].sizable_avatar.replace("{size}", "400")
+      );
+      let imageURL = imgData.data.data[0][0].sizable_avatar.replace(
+        "{size}",
+        "400"
+      );
+      colority(
+        imageURL,
+        {
+          skip: 30000,
+        },
+        (colors) => {
+          let gradientColors = colors
+            .map((c) => c.replace("rgb", "rgba").replace(")", ",0.5)"))
+            .join(", ");
+          document.body.style.background = `linear-gradient(90deg, ${gradientColors}), black`;
+          document.body.style.backgroundBlendMode = "screen";
+          if (colors.length > 2) {
+            document.documentElement.style.setProperty(
+              "--main-gradient",
+              `${colors[2]}`
+            );
+          }
+        }
+      );
+      let lyricdata = await SearchLyrics(id);
+      let getLyric = await getLyrics(
+        lyricdata.data.candidates[0].id,
+        lyricdata.data.candidates[0].accesskey
+      );
+      let musicData = await getListenSong(id);
+      setLyrics(getLyric.data.decodeContent.split("\n").slice(10));
+      setTimeEnd(
+        getLyric.data.decodeContent
+          .split("\n")
+          .slice(10)
+          .slice(-2)[0]
+          .slice(1, 6)
+      );
       if(musicUrl==='')
       {
-          let datas = await getSongDetail(id);
-          setSingData(datas.data.data[0]);
-          let imgData = await getSingerImage(id);
-          setImgUrl(
-            imgData.data.data[0][0].sizable_avatar.replace("{size}", "400")
-          );
-          let imageURL = imgData.data.data[0][0].sizable_avatar.replace(
-            "{size}",
-            "400"
-          );
-          colority(
-            imageURL,
-            {
-              skip: 30000,
-            },
-          (colors) => {
-            let gradientColors = colors
-              .map((c) => c.replace("rgb", "rgba").replace(")", ",0.5)"))
-              .join(", ");
-            document.body.style.background = `linear-gradient(90deg, ${gradientColors}), black`;
-            document.body.style.backgroundBlendMode = "screen";
-            if(colors.length>2)
-            {
-                document.documentElement.style.setProperty(
-                "--main-gradient",
-                `${colors[2]}`
-              );
-            }
-          }
-        );
-        let lyricdata = await SearchLyrics(id);
-        let getLyric = await getLyrics(
-          lyricdata.data.candidates[0].id,
-          lyricdata.data.candidates[0].accesskey
-        );
-        let musicData=await getListenSong(id)
-        setLyrics(getLyric.data.decodeContent.split("\n").slice(10));
-        setTimeEnd(
-          getLyric.data.decodeContent
-            .split("\n")
-            .slice(10)
-            .slice(-2)[0]
-            .slice(1, 6)
-        );
         if (musicData.data.url) {
           setMusicUrl(musicData.data.url);
         } else {
           //这里为了方便页面处理，如果没有音乐url,弹出错误提示
           error();
         }
+      }
+      if(musicUrl!=='')
+      {
+        if(musicData.data.url!==musicUrl)
+        {
+          setMusicUrl(musicData.data.url);
+          if(isPlaying)
+          {
+            setCurrentTime(0);
+            setTimeStart("00:00");
+          }
+        }
+        
       }
       if (isPlaying && musicUrl !== "") {
         const currentSeconds = currentTime;
